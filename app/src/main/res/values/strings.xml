@@ -2,4 +2,9 @@
     <string name="app_name">Pill Reminder</string>
     <string name="action_settings">Settings</string>
     <string name="activity2_name">Second Activity</string>
+    <string name="medicine_hint">Medication name</string>
+    <string name="duration">Duration</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="close">CLOSE</string>
 </resources>
