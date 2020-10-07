@@ -10,7 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SecondActivity"
+            android:name=".DurationActivity"
+            android:label="Duration"
+            android:parentActivityName=".MedicationFormActivity">
+        </activity>
+        <activity
+            android:name=".MedicationFormActivity"
             android:label="@string/activity2_name"
             android:parentActivityName=".MainActivity">
             <meta-data

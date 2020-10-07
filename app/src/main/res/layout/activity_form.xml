@@ -2,10 +2,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/second_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/second_activity"
-    tools:context=".SecondActivity">
+    tools:context=".MedicationFormActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,12 +25,15 @@
 
         <TextView
             android:id="@+id/durationID"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
             android:clickable="true"
+            android:focusable="true"
             android:text="@string/duration"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:theme="@style/clickableView" />
 
     </LinearLayout>
 

@@ -16,4 +16,8 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="clickableView">
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+
 </resources>
