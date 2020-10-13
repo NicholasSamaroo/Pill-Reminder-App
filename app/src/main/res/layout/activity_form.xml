@@ -5,7 +5,7 @@
     android:id="@+id/second_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MedicationFormActivity">
+    tools:context=".Activities.MedicationFormActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +30,6 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
             android:clickable="true"
-            android:focusable="true"
             android:text="@string/duration"
             android:textSize="20sp"
             android:theme="@style/clickableView" />

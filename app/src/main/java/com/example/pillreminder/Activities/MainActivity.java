@@ -1,8 +1,9 @@
-package com.example.pillreminder;
+package com.example.pillreminder.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.pillreminder.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;

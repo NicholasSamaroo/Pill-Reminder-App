@@ -5,50 +5,79 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DurationActivity">
+    tools:context=".Activities.DurationActivity">
 
-    <TextView
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/start_date"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
-        android:textSize="20sp"
-        android:clickable="true"
-        android:onClick="showDatePicker"
-        android:focusable="true"
-        android:theme="@style/clickableView"/>
-    
+        android:onClick="showDatePicker">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="showDatePicker"
+            android:text="@string/start_date"
+            android:textSize="20sp"
+            android:theme="@style/clickableView" />
+
+        <TextView
+            android:id="@+id/startDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/todayString"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <View
+            android:id="@+id/divider"
+            style="@style/Divider"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/startDate" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp">
-        
+        android:orientation="vertical">
+
         <RadioButton
+            android:id="@+id/noDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layoutDirection="rtl"
             android:text="@string/no_end_date"
-            android:layoutDirection="rtl"
-            android:layout_marginBottom="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <RadioButton
+            android:id="@+id/untilRadioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/for_x_amount_of_days"
+            android:layout_marginBottom="20dp"
             android:layoutDirection="rtl"
-            android:layout_marginBottom="10dp"
-            android:textSize="20sp"/>
-
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="@string/until_date"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/xDaysRadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layoutDirection="rtl"
-            android:textSize="20sp"/>
+            android:text="@string/for_x_amount_of_days"
+            android:textSize="20sp" />
+
     </RadioGroup>
 
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

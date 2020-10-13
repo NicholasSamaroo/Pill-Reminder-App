@@ -10,20 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".DurationActivity"
+            android:name=".Activities.DurationActivity"
             android:label="Duration"
-            android:parentActivityName=".MedicationFormActivity">
+            android:parentActivityName=".Activities.MedicationFormActivity">
         </activity>
         <activity
-            android:name=".MedicationFormActivity"
+            android:name=".Activities.MedicationFormActivity"
             android:label="@string/activity2_name"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".Activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.pillreminder.MainActivity" />
+                android:value="com.example.pillreminder.Activities.MainActivity" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
