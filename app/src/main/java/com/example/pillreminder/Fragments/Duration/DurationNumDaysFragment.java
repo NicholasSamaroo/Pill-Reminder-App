@@ -1,4 +1,4 @@
-package com.example.pillreminder.Fragments;
+package com.example.pillreminder.Fragments.Duration;
 
 import android.os.Bundle;
 
@@ -87,8 +87,8 @@ public class DurationNumDaysFragment extends Fragment implements DurationNumPick
     }
 
     @Override
-    public void numPickerValue(int val) {
-        String durationText = "For " + Integer.toString(val) + " day(s)";
+    public void numPickerValue(String val) {
+        String durationText = "For " + val + " day(s)";
         tv.setText(durationText);
     }
 }

@@ -11,12 +11,12 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activities.DurationActivity"
-            android:label="Duration"
+            android:label="@string/duration"
             android:parentActivityName=".Activities.MedicationFormActivity">
         </activity>
         <activity
             android:name=".Activities.MedicationFormActivity"
-            android:label="@string/activity2_name"
+            android:label="@string/medication_form"
             android:parentActivityName=".Activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
