@@ -1,5 +1,6 @@
 package com.example.pillreminder.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
@@ -18,6 +19,11 @@ import com.example.pillreminder.R;
  * create an instance of this fragment.
  */
 public class DurationNumDaysFragment extends Fragment implements DurationNumPickerFragment.returnNumPickerValue {
+    private DurationNumDaysFragment.returnDurationNumPickerValue callback;
+
+    public interface returnDurationNumPickerValue {
+        public void durationNumPickerValue(String val);
+    }
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,12 +50,11 @@ public class DurationNumDaysFragment extends Fragment implements DurationNumPick
      */
     // TODO: Rename and change types and number of parameters
     public static DurationNumDaysFragment newInstance() {
-        DurationNumDaysFragment fragment = new DurationNumDaysFragment();
         //Bundle args = new Bundle();
         //args.putString(ARG_PARAM1, param1);
         //args.putString(ARG_PARAM2, param2);
         //fragment.setArguments(args);
-        return fragment;
+        return new DurationNumDaysFragment();
     }
 
     @Override
@@ -61,6 +66,13 @@ public class DurationNumDaysFragment extends Fragment implements DurationNumPick
             mParam2 = getArguments().getString(ARG_PARAM2);
         }*/
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        callback = (returnDurationNumPickerValue) context;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -90,5 +102,6 @@ public class DurationNumDaysFragment extends Fragment implements DurationNumPick
     public void numPickerValue(int val) {
         String durationText = "For " + Integer.toString(val) + " day(s)";
         tv.setText(durationText);
+        callback.durationNumPickerValue(durationText);
     }
 }

@@ -13,14 +13,21 @@
             android:name=".Activities.DurationActivity"
             android:label="Duration"
             android:parentActivityName=".Activities.MedicationFormActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activities.MedicationFormActivity" />
         </activity>
         <activity
             android:name=".Activities.MedicationFormActivity"
             android:label="@string/activity2_name"
             android:parentActivityName=".Activities.MainActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.pillreminder.Activities.MainActivity" />
+                android:value=".Activities.MainActivity" />
         </activity>
         <activity
             android:name=".Activities.MainActivity"
@@ -28,7 +35,6 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
