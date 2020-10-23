@@ -1,4 +1,4 @@
-package com.example.pillreminder.Fragments;
+package com.example.pillreminder.Fragments.Duration;
 
 import android.content.Context;
 import android.os.Bundle;

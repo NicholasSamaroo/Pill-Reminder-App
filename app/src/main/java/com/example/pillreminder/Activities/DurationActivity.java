@@ -19,9 +19,9 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.pillreminder.Fragments.DatePickerFragment;
-import com.example.pillreminder.Fragments.DurationNumDaysFragment;
-import com.example.pillreminder.Fragments.DurationUntilDateFragment;
+import com.example.pillreminder.Fragments.Duration.DatePickerFragment;
+import com.example.pillreminder.Fragments.Duration.DurationNumDaysFragment;
+import com.example.pillreminder.Fragments.Duration.DurationUntilDateFragment;
 import com.example.pillreminder.R;
 
 import java.util.Calendar;

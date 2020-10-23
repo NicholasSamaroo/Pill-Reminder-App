@@ -1,4 +1,4 @@
-package com.example.pillreminder.Fragments;
+package com.example.pillreminder.Fragments.RemindEveryX;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -11,24 +11,25 @@ import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.NumberPicker;
 
+import com.example.pillreminder.Fragments.Duration.DurationNumPickerFragment;
 import com.example.pillreminder.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link DurationNumPickerFragment#newInstance} factory method to
+ * Use the {@link DoseNumPickerFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DurationNumPickerFragment extends DialogFragment {
-    private returnNumPickerValue callback;
+public class DoseNumPickerFragment extends DialogFragment {
+    final int PICKER_MAX = 11;
+    final int PICKER_MIN = 0;
+    private DoseNumPickerFragment.returnNumPickerValue callback;
 
     public interface returnNumPickerValue {
-        public void numPickerValue(int val);
+        public void numPickerValue(String val);
     }
-
-    final int PICKER_MAX = 365;
-    final int PICKER_MIN = 1;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -39,7 +40,7 @@ public class DurationNumPickerFragment extends DialogFragment {
     private String mParam1;
     private String mParam2;
 
-    public DurationNumPickerFragment() {
+    public DoseNumPickerFragment() {
         // Required empty public constructor
     }
 
@@ -49,11 +50,11 @@ public class DurationNumPickerFragment extends DialogFragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment DurationNumPickerFragment.
+     * @return A new instance of fragment DoseNumPickerFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DurationNumPickerFragment newInstance(String param1, String param2) {
-        DurationNumPickerFragment fragment = new DurationNumPickerFragment();
+    public static DoseNumPickerFragment newInstance(String param1, String param2) {
+        DoseNumPickerFragment fragment = new DoseNumPickerFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -66,7 +67,7 @@ public class DurationNumPickerFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         try {
-            callback = (returnNumPickerValue) getTargetFragment();
+            callback = (DoseNumPickerFragment.returnNumPickerValue) getTargetFragment();
         } catch(ClassCastException e) {
             throw new ClassCastException("Calling fragment must implement returnNumPickerValue");
         }
@@ -76,35 +77,17 @@ public class DurationNumPickerFragment extends DialogFragment {
         }*/
     }
 
-   /* @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_duration_num_picker, container, false);
-        NumberPicker picker = view.findViewById(R.id.numPicker);
-        picker.setMaxValue(PICKERMAX);
-        picker.setMinValue(PICKERMIN);
-        String[] pickerValues = new String[PICKERMAX];
-
-        for(int i = 1; i <= PICKERMAX; i++) {
-            pickerValues[i - 1] = i + "";
-        }
-        picker.setWrapSelectorWheel(false);
-        picker.setDisplayedValues(pickerValues);
-
-        return view;
-    }*/
-
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View inflateNumPicker = LayoutInflater.from(getContext()).inflate(R.layout.fragment_duration_num_picker,null);
+    public Dialog onCreateDialog(Bundle savedInstanceState){
+        View inflateNumPicker = LayoutInflater.from(getContext()).inflate(R.layout.fragment_dose_num_picker,null);
 
-        final NumberPicker picker = inflateNumPicker.findViewById(R.id.numPicker);
+        final NumberPicker picker = inflateNumPicker.findViewById(R.id.doseNumPicker);
         picker.setMaxValue(PICKER_MAX);
         picker.setMinValue(PICKER_MIN);
-        String[] pickerValues = new String[PICKER_MAX];
+        final String[] pickerValues = new String[12];
 
-        for(int i = 1; i <= PICKER_MAX; i++) {
+        for(int i = 1; i <= 12; i++) {
             pickerValues[i - 1] = i + "";
         }
         picker.setWrapSelectorWheel(false);
@@ -112,11 +95,11 @@ public class DurationNumPickerFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(inflateNumPicker)
-                .setTitle(R.string.duration)
+                .setTitle(R.string.dose)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        final int pickerValue = picker.getValue();
+                        final String pickerValue = pickerValues[picker.getValue()];
                         callback.numPickerValue(pickerValue);
                     }
                 })
@@ -132,5 +115,4 @@ public class DurationNumPickerFragment extends DialogFragment {
         dialog.setCancelable(false);
         return dialog;
     }
-
 }

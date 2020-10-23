@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/second_activity"
@@ -9,19 +9,21 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
-
 
         <EditText
             android:id="@+id/medicine_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="@dimen/form_margin_left"
+            android:layout_marginLeft="@dimen/form_margin_left"
             android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
             android:layout_marginRight="30dp"
             android:hint="@string/medicine_hint"
-            android:inputType="text" />
+            android:inputType="text"
+            android:importantForAutofill="no" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -54,11 +56,81 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/form_margin_left"
+            android:layout_marginLeft="@dimen/form_margin_left"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/frequencyOfIntake"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/frequency_of_intake"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/frequencyOfIntake"
+                android:layout_toEndOf="@+id/frequencyOfIntake"
+                android:layout_toRightOf="@+id/frequencyOfIntake" />
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/formFragmentContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/form_margin_left"
+            android:layout_marginLeft="@dimen/form_margin_left"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/inventory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/inventory"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/inventoryBelowText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/every_below_text"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inventory" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/form_margin_left"
+            android:layout_marginLeft="@dimen/form_margin_left"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/finish" />
+
     </LinearLayout>
+
 
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-</FrameLayout>
+</ScrollView>
