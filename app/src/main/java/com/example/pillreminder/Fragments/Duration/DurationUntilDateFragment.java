@@ -1,10 +1,13 @@
 package com.example.pillreminder.Fragments.Duration;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +23,11 @@ import java.util.Calendar;
  * create an instance of this fragment.
  */
 public class DurationUntilDateFragment extends Fragment implements DatePickerFragmentUntilDate.returnDatePicker {
+    private DurationUntilDateFragment.returnDurationDatePickerValue callback;
+
+    public interface returnDurationDatePickerValue {
+        public void durationDatePickerValue(String val);
+    }
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,12 +54,11 @@ public class DurationUntilDateFragment extends Fragment implements DatePickerFra
      */
     // TODO: Rename and change types and number of parameters
     public static DurationUntilDateFragment newInstance() {
-        DurationUntilDateFragment fragment = new DurationUntilDateFragment();
         //Bundle args = new Bundle();
         //args.putString(ARG_PARAM1, param1);
         //args.putString(ARG_PARAM2, param2);
         //fragment.setArguments(args);
-        return fragment;
+        return new DurationUntilDateFragment();
     }
 
     @Override
@@ -61,6 +68,12 @@ public class DurationUntilDateFragment extends Fragment implements DatePickerFra
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }*/
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        callback = (returnDurationDatePickerValue) context;
     }
 
     @Override
@@ -78,6 +91,8 @@ public class DurationUntilDateFragment extends Fragment implements DatePickerFra
         return view;
     }
 
+
+
     public void displayDatePicker() {
         DialogFragment picker = new DatePickerFragmentUntilDate();
         picker.setTargetFragment(this,0);
@@ -91,10 +106,13 @@ public class DurationUntilDateFragment extends Fragment implements DatePickerFra
         String yearString = Integer.toString(year);
         String dateMessage = (monthString + "/" + dayString + "/" + yearString);
 
+
         if(dateMessage.equals(currentDate())) {
             date.setText(getResources().getString(R.string.todayString));
+            callback.durationDatePickerValue(getResources().getString(R.string.todayString));
         } else {
             date.setText(dateMessage);
+            callback.durationDatePickerValue(dateMessage);
         }
     }
 
