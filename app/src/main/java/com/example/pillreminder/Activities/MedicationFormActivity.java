@@ -7,6 +7,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,9 +29,6 @@ public class MedicationFormActivity extends AppCompatActivity implements Adapter
     TextView inventoryBelowText;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +41,11 @@ public class MedicationFormActivity extends AppCompatActivity implements Adapter
 
         String durationValue;
         Intent intent = getIntent();
-        if(intent.hasExtra("durationNoDate")) {
+        if (intent.hasExtra("durationNoDate")) {
             durationBelowText.setText(intent.getStringExtra("durationNoDate"));
-        } else if(intent.hasExtra("durationNumPicker")) {
+        } else if (intent.hasExtra("durationNumPicker")) {
             durationBelowText.setText(intent.getStringExtra("durationNumPicker"));
-        } else if(intent.hasExtra("durationDate")) {
+        } else if (intent.hasExtra("durationDate")) {
             durationValue = "Until " + intent.getStringExtra("durationDate");
             durationBelowText.setText(durationValue);
         }
@@ -85,7 +83,7 @@ public class MedicationFormActivity extends AppCompatActivity implements Adapter
             case 0:
                 fragmentManager = getSupportFragmentManager();
                 Fragment fragment = fragmentManager.findFragmentById(R.id.formFragmentContainer);
-                if(fragment != null) {
+                if (fragment != null) {
                     fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.hide(fragment).commit();
                 }
@@ -115,7 +113,8 @@ public class MedicationFormActivity extends AppCompatActivity implements Adapter
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {}
+    public void onNothingSelected(AdapterView<?> parent) {
+    }
 
     public void displayInventoryNumPickerFragment() {
         DialogFragment newFragment = new InventoryNumPickerFragment();
