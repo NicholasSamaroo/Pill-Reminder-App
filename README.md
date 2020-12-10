@@ -12,13 +12,10 @@ is used to create unique pending intents for alarm creation. The integer is save
 
 Features to be integrated in the future include, a duration option which allows the user to choose for how long they want to be notified for *and* an inventory tracker which would track how many pills the user has left and notify them when they are running low.
 
-Demo, then an example of the notification being fired off, followed by the features that will be integrated in the future
+Demo, then an example of the notification being fired, followed by the features that will be integrated in the future
 
 ![Demo](https://github.com/NicholasSamaroo/Pill-Reminder-App/blob/master/demo/demo.gif)
 Demo
-
-![Notification Example](https://github.com/NicholasSamaroo/Pill-Reminder-App/blob/master/Notification%20Example/Notification.gif)
-Example of Notification being fired
 
 ![Future integrations](https://github.com/NicholasSamaroo/Pill-Reminder-App/blob/master/Future%20integrations/needToIntegrate.gif)
 Features to be integrated in the future
