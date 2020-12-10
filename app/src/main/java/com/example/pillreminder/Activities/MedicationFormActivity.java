@@ -75,14 +75,14 @@ public class MedicationFormActivity extends AppCompatActivity implements
         alarmID = sharedPref.getInt("reminderIntegerId", 0);
 
         TextView durationListener = findViewById(R.id.durationID);
-        /*durationListener.setOnClickListener(new View.OnClickListener() {
+        durationListener.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "This feature will be implemented in the near future", Toast.LENGTH_LONG).show();
             }
-        });*/
+        });
 
-           durationListener.setOnClickListener(new View.OnClickListener() {
+           /*durationListener.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MedicationFormActivity.this, DurationActivity.class));
@@ -101,7 +101,7 @@ public class MedicationFormActivity extends AppCompatActivity implements
         } else if (intent.hasExtra("durationDate")) {
             durationValue = "Until " + intent.getStringExtra("durationDate");
             durationBelowText.setText(durationValue);
-        }
+        } */
 
         // Instantiate the text view below "Inventory" so we can set it to the number the user chooses
         // via our implementation of inventory number picker fragment which has callback methods to return the number
@@ -110,8 +110,8 @@ public class MedicationFormActivity extends AppCompatActivity implements
         inventoryListener.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(getApplicationContext(), "This feature will be implemented in the near future", Toast.LENGTH_LONG).show();
-                displayInventoryNumPickerFragment();
+                Toast.makeText(getApplicationContext(), "This feature will be implemented in the near future", Toast.LENGTH_LONG).show();
+                //displayInventoryNumPickerFragment();
             }
         });
 
