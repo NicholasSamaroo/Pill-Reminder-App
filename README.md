@@ -10,7 +10,9 @@ utilizes a **recycler view**. From there, if the card is swiped left or right an
 All card information is stored using the **Room persistence library** so when the user launches the app again after closing it everything is restored. For now, a running integer
 is used to create unique pending intents for alarm creation. The integer is saved to **shared preferences** and restored on creation of the form activity.
 
-Demo, then an example of the notification being fired off, followed by some features that will be integrated in the future
+Features to be integrated in the future include, a duration option which allows the user to choose for how long they want to be notified for *and* an inventory tracker which would track how many pills the user has left and notify them when they are running low.
+
+Demo, then an example of the notification being fired off, followed by the features that will be integrated in the future
 
 ![Demo](https://github.com/NicholasSamaroo/Pill-Reminder-App/blob/master/demo/demo.gif)
 Demo
