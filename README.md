@@ -10,6 +10,8 @@ utilizes a **recycler view**. From there, if the card is swiped left or right an
 All card information is stored using the **Room persistence library** so when the user launches the app again after closing it everything is restored. For now, a running integer
 is used to create unique pending intents for alarm creation. The integer is saved to **shared preferences** and restored on creation of the form activity.
 
+Demo 
 ![Demo](https://github.com/NicholasSamaroo/Pill-Reminder-App/blob/master/demo/demo.gif)
 
+Features to be integrated in the future
 ![Future integrations](https://github.com/NicholasSamaroo/Pill-Reminder-App/blob/master/Future%20integrations/needToIntegrate.gif)
