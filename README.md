@@ -17,5 +17,8 @@ Demo, then an example of the notification being fired, followed by the features 
 ![Demo](https://github.com/NicholasSamaroo/Pill-Reminder-App/blob/master/demo/demo.gif)
 Demo
 
+![Example Notification](https://github.com/NicholasSamaroo/Pill-Reminder-App/blob/master/Notification%20Example/Notification.gif)
+Example of Notification being fired
+
 ![Future integrations](https://github.com/NicholasSamaroo/Pill-Reminder-App/blob/master/Future%20integrations/needToIntegrate.gif)
 Features to be integrated in the future
