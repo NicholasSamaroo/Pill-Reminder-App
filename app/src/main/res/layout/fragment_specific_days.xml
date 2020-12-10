@@ -13,12 +13,14 @@
         android:layout_marginStart="@dimen/form_margin_left">
 
         <CheckBox
+            android:id="@+id/monday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/monday"
             android:textAppearance="?android:textAppearanceMedium"/>
 
         <CheckBox
+            android:id="@+id/tuesday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tuesday"
@@ -26,6 +28,7 @@
             android:layout_marginTop="15dp"/>
 
         <CheckBox
+            android:id="@+id/wednesday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/wednesday"
@@ -33,6 +36,7 @@
             android:textAppearance="?android:textAppearanceMedium"/>
 
         <CheckBox
+            android:id="@+id/thursday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/thursday"
@@ -40,6 +44,7 @@
             android:textAppearance="?android:textAppearanceMedium"/>
 
         <CheckBox
+            android:id="@+id/friday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/friday"
@@ -47,6 +52,7 @@
             android:textAppearance="?android:textAppearanceMedium"/>
 
         <CheckBox
+            android:id="@+id/saturday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/saturday"
@@ -54,18 +60,12 @@
             android:textAppearance="?android:textAppearanceMedium"/>
 
         <CheckBox
+            android:id="@+id/sunday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sunday"
             android:layout_marginTop="15dp"
             android:textAppearance="?android:textAppearanceMedium"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/add_reminder"
-            android:textSize="20sp"
-            android:layout_marginTop="15dp"/>
     </LinearLayout>
 
 </FrameLayout>

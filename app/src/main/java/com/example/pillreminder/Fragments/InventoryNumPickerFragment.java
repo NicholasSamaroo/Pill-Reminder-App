@@ -15,12 +15,8 @@ import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.NumberPicker;
-import android.widget.Toast;
 
-import com.example.pillreminder.Fragments.RemindEveryX.DoseNumPickerFragment;
 import com.example.pillreminder.R;
 
 /**
@@ -28,6 +24,8 @@ import com.example.pillreminder.R;
  * Use the {@link InventoryNumPickerFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+// This dialog is created by clicking on the "Inventory" text view found in the Medication Form Activity
 public class InventoryNumPickerFragment extends DialogFragment {
     private InventoryNumPickerFragment.returnInventoryNumPickerValue callback;
 

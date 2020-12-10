@@ -23,7 +23,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/fragmentDurationUntilDate"
+            android:id="@+id/fragmentUntilDateTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -34,11 +34,11 @@
             app:layout_constraintTop_toBottomOf="@+id/fragmentUntilDateDivider" />
 
         <TextView
-            android:id="@+id/fragmentUntilDateText"
+            android:id="@+id/fragmentUntilDateBottomText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tap_to_select_a_date"
-            app:layout_constraintTop_toBottomOf="@+id/fragmentDurationUntilDate" />
+            app:layout_constraintTop_toBottomOf="@+id/fragmentUntilDateTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

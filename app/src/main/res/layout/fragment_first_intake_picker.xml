@@ -4,40 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.RemindEveryX.FirstIntakePickerFragment">
+    tools:context=".Fragments.EveryXHoursPickerFragments.FirstIntakePickerFragment">
 
-
-    <NumberPicker
-        android:id="@+id/hours"
+    <TimePicker
+        android:id="@+id/firstIntakeTimePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/minutes" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@id/hours"
-        android:text="@string/colon"
-        android:textSize="30sp" />
-
-    <NumberPicker
-        android:id="@+id/minutes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp" />
-
-    <NumberPicker
-        android:id="@+id/amOrPm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/minutes" />
+        android:layout_centerInParent="true"/>
 
 
 </RelativeLayout>
