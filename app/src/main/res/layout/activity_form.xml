@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/medicine_name"
+            android:id="@+id/medicationName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/form_margin_left"
@@ -31,7 +31,7 @@
 
             <TextView
                 android:id="@+id/durationID"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginLeft="30dp"
@@ -50,11 +50,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginLeft="30dp"
+                android:text="@string/tap_to_select_a_duration"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/durationID" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <View
+            style="@style/Divider"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -87,34 +93,94 @@
             android:layout_marginTop="10dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/divider"
+                style="@style/Divider"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="10dp" />
+
+            <LinearLayout
+                android:id="@+id/addReminderContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="@dimen/form_margin_left"
+                app:layout_constraintTop_toBottomOf="@id/divider"
+                app:layout_constraintBottom_toTopOf="@id/addReminder"
+                android:layout_marginStart="@dimen/form_margin_left">
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/addReminder"
+                android:drawablePadding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/add_reminder"
+                android:textSize="20sp"
+                android:theme="@style/clickableView"
+                android:layout_marginStart="@dimen/form_margin_left"
+                android:layout_marginLeft="@dimen/form_margin_left"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addReminderContainer"
+                app:drawableLeftCompat="@drawable/ic_baseline_access_alarms_24" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/form_margin_left"
-            android:layout_marginLeft="@dimen/form_margin_left"
-            android:layout_marginTop="10dp">
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/dividerInventory"
+                style="@style/Divider"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="10dp" />
 
             <TextView
                 android:id="@+id/inventory"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="@dimen/form_margin_left"
+                android:layout_marginLeft="@dimen/form_margin_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:focusable="true"
                 android:text="@string/inventory"
                 android:textSize="20sp"
+                android:theme="@style/clickableView"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/dividerInventory"/>
 
             <TextView
                 android:id="@+id/inventoryBelowText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/every_below_text"
+                android:layout_marginStart="@dimen/form_margin_left"
+                android:layout_marginLeft="@dimen/form_margin_left"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/inventory" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
+            android:id="@+id/saveButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/form_margin_left"
@@ -123,7 +189,7 @@
             android:layout_marginEnd="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/finish" />
+            android:text="@string/save" />
 
     </LinearLayout>
 

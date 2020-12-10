@@ -22,12 +22,15 @@
 
     <include layout="@layout/content_main" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/extendedFab"
+        android:theme="@style/MyMaterialTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add_card" />
+        android:text="@string/add_reminder"
+        app:icon="@android:drawable/ic_input_add"
+        app:backgroundTint="@color/fabColor"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

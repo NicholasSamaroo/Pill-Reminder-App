@@ -27,7 +27,7 @@
             android:id="@+id/doseBelowText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tap to select a dose"
+            android:text="@string/tap_to_select_a_dose"
             app:layout_constraintTop_toBottomOf="@id/dose" />
 
         <TextView
@@ -45,7 +45,7 @@
             android:id="@+id/remindEveryBelowText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tap to select duration"
+            android:text="@string/tap_to_select_duration"
             app:layout_constraintTop_toBottomOf="@id/remindEvery" />
 
         <TextView
@@ -63,7 +63,7 @@
             android:id="@+id/firstIntakeBelowText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tap to select first intake"
+            android:text="@string/tap_to_select_first_intake"
             app:layout_constraintTop_toBottomOf="@id/firstIntake" />
 
         <TextView

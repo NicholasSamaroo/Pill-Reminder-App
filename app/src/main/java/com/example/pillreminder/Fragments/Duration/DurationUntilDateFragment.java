@@ -22,6 +22,9 @@ import java.util.Calendar;
  * Use the {@link DurationUntilDateFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+// Fragment for the "Until Date" Radio Button
+// This fragment is created by clicking on the "Until Date" radio button
 public class DurationUntilDateFragment extends Fragment implements DatePickerFragmentUntilDate.returnDatePicker {
     private DurationUntilDateFragment.returnDurationDatePickerValue callback;
 
@@ -29,45 +32,19 @@ public class DurationUntilDateFragment extends Fragment implements DatePickerFra
         public void durationDatePickerValue(String val);
     }
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    //private static final String ARG_PARAM1 = "param1";
-    //private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    //private String mParam1;
-    //private String mParam2;
-
-    TextView date;
+    TextView untilTextViewBottomText;
 
     public DurationUntilDateFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DurationUntilDateFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static DurationUntilDateFragment newInstance() {
-        //Bundle args = new Bundle();
-        //args.putString(ARG_PARAM1, param1);
-        //args.putString(ARG_PARAM2, param2);
-        //fragment.setArguments(args);
         return new DurationUntilDateFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }*/
     }
 
     @Override
@@ -80,8 +57,8 @@ public class DurationUntilDateFragment extends Fragment implements DatePickerFra
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_duration_until_date, container, false);
-        TextView untilTextView = view.findViewById(R.id.fragmentDurationUntilDate);
-        date = view.findViewById(R.id.fragmentUntilDateText);
+        TextView untilTextView = view.findViewById(R.id.fragmentUntilDateTextView);
+        untilTextViewBottomText = view.findViewById(R.id.fragmentUntilDateBottomText);
         untilTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,10 +85,10 @@ public class DurationUntilDateFragment extends Fragment implements DatePickerFra
 
 
         if(dateMessage.equals(currentDate())) {
-            date.setText(getResources().getString(R.string.todayString));
+            untilTextViewBottomText.setText(getResources().getString(R.string.todayString));
             callback.durationDatePickerValue(getResources().getString(R.string.todayString));
         } else {
-            date.setText(dateMessage);
+            untilTextViewBottomText.setText(dateMessage);
             callback.durationDatePickerValue(dateMessage);
         }
     }

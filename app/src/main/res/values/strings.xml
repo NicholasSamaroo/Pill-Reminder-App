@@ -15,7 +15,6 @@
     <string name="inventory">Inventory</string>
 
     <string-array name="frequency_of_intake_array">
-        <item>Select Frequency</item>
         <item>Daily</item>
         <item>Daily every X hours</item>
         <item>Every X Days</item>
@@ -23,7 +22,6 @@
     </string-array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="add_reminder">Add Reminder</string>
     <string name="dose">Dose</string>
     <string name="remind_every">Remind every</string>
@@ -40,10 +38,17 @@
     <string name="sunday">Sunday</string>
     <string name="every_below_text">Tap to select a number</string>
     <string name="pills">pill(s)</string>
-    <string name="finish">FINISH</string>
+    <string name="save">SAVE</string>
 
     <string name="done">Done</string>
     <string name="tap_to_select_a_duration">Tap to select a duration</string>
     <string name="tap_to_select_a_date">Tap to select a date</string>
+    <string name="tap_to_select_first_intake">Tap to select first intake</string>
+    <string name="tap_to_select_duration">Tap to select duration</string>
+    <string name="tap_to_select_a_dose">Tap to select a dose</string>
+    <string name="description">Close alarm instance</string>
+    <string name="channel_name">Medication Reminder</string>
+    <string name="channel_description">Notification to take medication</string>
+    <string name="choose_a_time">Choose a time</string>
 
 </resources>
