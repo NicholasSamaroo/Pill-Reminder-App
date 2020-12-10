@@ -9,7 +9,7 @@ utilizes a **recycler view**. From there, if the card is swiped left or right an
 
 All card information is stored using the **Room persistence library**. For now, a running integer is used to create unique pending intents for alarm creation. The integer is saved to **shared preferences** and restored on creation of the form activity.
 
-Features to be integrated in the future include, a duration option which allows the user to choose for how long they want to be notified for *and* an inventory tracker which would track how many pills the user has left and notify them when they are running low.
+Features to be integrated in the future include, a duration option which allows the user to choose for how long they want to be notified for *and* an inventory tracker which would track how many pills the user has left and notify them when they are running low. As seen in the demo, there is a button labeled "Dose" to the far right of the "Choose a time" button where the user would input the dosage for their medication.
 
 Demo, then an example of the notification being fired, followed by the features that will be integrated in the future
 
