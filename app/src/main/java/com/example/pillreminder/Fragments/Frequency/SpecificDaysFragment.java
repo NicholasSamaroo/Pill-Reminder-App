@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,7 +86,7 @@ public class SpecificDaysFragment extends Fragment implements View.OnClickListen
         boolean checked = ((CheckBox) v).isChecked();
 
         switch (v.getId()) {
-            case R.id.monday:
+            case R.id.sunday:
                 if (checked) {
                     if (!daysOfWeek.contains(1)) {
                         daysOfWeek.add(1);
@@ -94,7 +95,7 @@ public class SpecificDaysFragment extends Fragment implements View.OnClickListen
                     daysOfWeek.remove(Integer.valueOf(1));
                 }
                 break;
-            case R.id.tuesday:
+            case R.id.monday:
                 if (checked) {
                     if (!daysOfWeek.contains(2)) {
                         daysOfWeek.add(2);
@@ -103,7 +104,7 @@ public class SpecificDaysFragment extends Fragment implements View.OnClickListen
                     daysOfWeek.remove(Integer.valueOf(2));
                 }
                 break;
-            case R.id.wednesday:
+            case R.id.tuesday:
                 if (checked) {
                     if (!daysOfWeek.contains(3)) {
                         daysOfWeek.add(3);
@@ -112,7 +113,7 @@ public class SpecificDaysFragment extends Fragment implements View.OnClickListen
                     daysOfWeek.remove(Integer.valueOf(3));
                 }
                 break;
-            case R.id.thursday:
+            case R.id.wednesday:
                 if (checked) {
                     if (!daysOfWeek.contains(4)) {
                         daysOfWeek.add(4);
@@ -121,7 +122,7 @@ public class SpecificDaysFragment extends Fragment implements View.OnClickListen
                     daysOfWeek.remove(Integer.valueOf(4));
                 }
                 break;
-            case R.id.friday:
+            case R.id.thursday:
                 if (checked) {
                     if (!daysOfWeek.contains(5)) {
                         daysOfWeek.add(5);
@@ -130,7 +131,7 @@ public class SpecificDaysFragment extends Fragment implements View.OnClickListen
                     daysOfWeek.remove(Integer.valueOf(5));
                 }
                 break;
-            case R.id.saturday:
+            case R.id.friday:
                 if (checked) {
                     if (!daysOfWeek.contains(6)) {
                         daysOfWeek.add(6);
@@ -139,7 +140,7 @@ public class SpecificDaysFragment extends Fragment implements View.OnClickListen
                     daysOfWeek.remove(Integer.valueOf(6));
                 }
                 break;
-            case R.id.sunday:
+            case R.id.saturday:
                 if (checked) {
                     if (!daysOfWeek.contains(7)) {
                         daysOfWeek.add(7);
@@ -149,7 +150,7 @@ public class SpecificDaysFragment extends Fragment implements View.OnClickListen
                 }
                 break;
         }
-
+        //Log.e("test", String.valueOf(daysOfWeek));
         callback.daysOfWeekArrayList(daysOfWeek);
     }
 

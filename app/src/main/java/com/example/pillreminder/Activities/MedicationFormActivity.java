@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -174,7 +175,7 @@ public class MedicationFormActivity extends AppCompatActivity implements
                             notifyIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
                             notifyIntent.putExtra("notificationTime", firstButton.getText().toString());
                             notifyIntent.putExtra("notificationMedicationName", medicationName.getText().toString());
-                            alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), alarmID, notifyIntent, 0);
+                            alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), alarmID, notifyIntent, PendingIntent.FLAG_NO_CREATE);
                             alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
                             calendar = Calendar.getInstance();
@@ -215,7 +216,7 @@ public class MedicationFormActivity extends AppCompatActivity implements
                             notifyIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
                             notifyIntent.putExtra("notificationTime", firstButton.getText().toString());
                             notifyIntent.putExtra("notificationMedicationName", medicationName.getText().toString());
-                            alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), alarmID, notifyIntent, 0);
+                            alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), alarmID, notifyIntent, PendingIntent.FLAG_NO_CREATE);
                             alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
                             calendar = Calendar.getInstance();
@@ -270,8 +271,8 @@ public class MedicationFormActivity extends AppCompatActivity implements
                                 if (!alarmIdForDaysOfWeek.isEmpty()) {
                                     alarmIdForDaysOfWeek.clear();
                                 }
-
                                 for (Integer i : finalDaysOfWeek) {
+                                    Log.e("test", String.valueOf(i));
                                     calendar = Calendar.getInstance();
                                     calendar.setTimeInMillis(System.currentTimeMillis());
                                     calendar.set(Calendar.DAY_OF_WEEK, i);
@@ -283,7 +284,7 @@ public class MedicationFormActivity extends AppCompatActivity implements
                                         calendar.add(Calendar.DAY_OF_YEAR, 7);
                                     }
 
-                                    alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), alarmID, notifyIntent, 0);
+                                    alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), alarmID, notifyIntent, PendingIntent.FLAG_NO_CREATE);
                                     alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, alarmIntent);
                                     alarmIdForDaysOfWeek.add(alarmID);
                                     alarmID++;
@@ -321,25 +322,25 @@ public class MedicationFormActivity extends AppCompatActivity implements
             for (Integer i : finalDaysOfWeek) {
                 switch (i) {
                     case 1:
-                        daysOfWeek.append("Mon.");
+                        daysOfWeek.append("Sun.");
                         break;
                     case 2:
-                        daysOfWeek.append("Tues.");
+                        daysOfWeek.append("Mon.");
                         break;
                     case 3:
-                        daysOfWeek.append("Wed.");
+                        daysOfWeek.append("Tues.");
                         break;
                     case 4:
-                        daysOfWeek.append("Thurs.");
+                        daysOfWeek.append("Wed.");
                         break;
                     case 5:
-                        daysOfWeek.append("Fri.");
+                        daysOfWeek.append("Thurs.");
                         break;
                     case 6:
-                        daysOfWeek.append("Sat.");
+                        daysOfWeek.append("Fri.");
                         break;
                     case 7:
-                        daysOfWeek.append("Sun.");
+                        daysOfWeek.append("Sat.");
                         break;
                 }
             }
