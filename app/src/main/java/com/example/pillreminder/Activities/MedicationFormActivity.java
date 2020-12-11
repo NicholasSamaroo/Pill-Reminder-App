@@ -175,7 +175,7 @@ public class MedicationFormActivity extends AppCompatActivity implements
                             notifyIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
                             notifyIntent.putExtra("notificationTime", firstButton.getText().toString());
                             notifyIntent.putExtra("notificationMedicationName", medicationName.getText().toString());
-                            alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), alarmID, notifyIntent, PendingIntent.FLAG_NO_CREATE);
+                            alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), alarmID, notifyIntent, 0);
                             alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
                             calendar = Calendar.getInstance();
@@ -216,7 +216,7 @@ public class MedicationFormActivity extends AppCompatActivity implements
                             notifyIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
                             notifyIntent.putExtra("notificationTime", firstButton.getText().toString());
                             notifyIntent.putExtra("notificationMedicationName", medicationName.getText().toString());
-                            alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), alarmID, notifyIntent, PendingIntent.FLAG_NO_CREATE);
+                            alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), alarmID, notifyIntent, 0);
                             alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
                             calendar = Calendar.getInstance();
@@ -284,7 +284,7 @@ public class MedicationFormActivity extends AppCompatActivity implements
                                         calendar.add(Calendar.DAY_OF_YEAR, 7);
                                     }
 
-                                    alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), alarmID, notifyIntent, PendingIntent.FLAG_NO_CREATE);
+                                    alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), alarmID, notifyIntent, 0);
                                     alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, alarmIntent);
                                     alarmIdForDaysOfWeek.add(alarmID);
                                     alarmID++;

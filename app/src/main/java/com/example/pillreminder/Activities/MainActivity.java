@@ -114,13 +114,13 @@ public class MainActivity extends AppCompatActivity {
                                     intent = new Intent(getApplicationContext(), AlarmReceiver.class);
 
                                     for (Integer i : intermediate) {
-                                        pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), i, intent, PendingIntent.FLAG_NO_CREATE);
+                                        pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), i, intent, 0);
                                         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
                                         alarmManager.cancel(pendingIntent);
                                     }
                                 } else {
                                     intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-                                    pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), delete.getAlarmID(), intent, PendingIntent.FLAG_NO_CREATE);
+                                    pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), delete.getAlarmID(), intent, 0);
                                     alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
                                     alarmManager.cancel(pendingIntent);
                                 }
