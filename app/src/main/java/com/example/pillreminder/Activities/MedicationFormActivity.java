@@ -47,20 +47,23 @@ public class MedicationFormActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener, InventoryNumPickerFragment.returnInventoryNumPickerValue, SpecificDaysFragment.returnDaysOfWeekArrayList,
         EveryXDaysFragment.returnEveryXDaysValue {
 
-    int alarmID;
-    TextView inventoryBelowText;
-    ImageButton imageButtonOne;
-    Button firstButton;
-    int reminderHour = -1;
-    int reminderMinute = -1;
-    int everyXDaysNumber = 0;
-    StringBuilder daysOfWeek = new StringBuilder();
-    ArrayList<Integer> alarmIdForDaysOfWeek = new ArrayList<>();
-    ArrayList<Integer> finalDaysOfWeek = null;
+    private int alarmID;
+    private int reminderHour = -1;
+    private int reminderMinute = -1;
+    private int everyXDaysNumber = 0;
+
+    private TextView inventoryBelowText;
+    private ImageButton imageButtonOne;
+    private Button firstButton;
+
+    private StringBuilder daysOfWeek = new StringBuilder();
+    private ArrayList<Integer> alarmIdForDaysOfWeek = new ArrayList<>();
+    private ArrayList<Integer> finalDaysOfWeek = null;
+
     private AlarmManager alarmManager;
     private PendingIntent alarmIntent;
-    Intent notifyIntent;
-    SharedPreferences sharedPref;
+    private Intent notifyIntent;
+    private SharedPreferences sharedPref;
 
 
     @Override
@@ -144,7 +147,7 @@ public class MedicationFormActivity extends AppCompatActivity implements
                     firstButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            reminderTimePicker(v);
+                            reminderTimePicker();
                         }
                     });
                 }
@@ -183,6 +186,7 @@ public class MedicationFormActivity extends AppCompatActivity implements
                             calendar.set(Calendar.HOUR_OF_DAY, reminderHour);
                             calendar.set(Calendar.MINUTE, reminderMinute);
                             calendar.set(Calendar.SECOND, 0);
+                            calendar.set(Calendar.MILLISECOND, 0);
 
                             if (calendar.getTimeInMillis() < System.currentTimeMillis()) {
                                 calendar.add(Calendar.DAY_OF_YEAR, 1);
@@ -190,7 +194,7 @@ public class MedicationFormActivity extends AppCompatActivity implements
 
                             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
 
-                            CardData cardData = new CardData(alarmID, medicationName.getText().toString(), "Daily", firstButton.getText().toString());
+                            CardData cardData = new CardData(alarmID, "Daily", medicationName.getText().toString(), "Daily", firstButton.getText().toString());
                             alarmID++;
                             sharedPref = MedicationFormActivity.this.getPreferences(Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPref.edit();
@@ -224,6 +228,7 @@ public class MedicationFormActivity extends AppCompatActivity implements
                             calendar.set(Calendar.HOUR_OF_DAY, reminderHour);
                             calendar.set(Calendar.MINUTE, reminderMinute);
                             calendar.set(Calendar.SECOND, 0);
+                            calendar.set(Calendar.MILLISECOND, 0);
 
                             if (calendar.getTimeInMillis() < System.currentTimeMillis()) {
                                 calendar.add(Calendar.DAY_OF_YEAR, everyXDaysNumber);
@@ -236,7 +241,7 @@ public class MedicationFormActivity extends AppCompatActivity implements
 
                             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * everyXDaysNumber, alarmIntent);
 
-                            CardData cardData = new CardData(alarmID, medicationName.getText().toString(), "Every " + everyXDaysNumber + " days", firstButton.getText().toString());
+                            CardData cardData = new CardData(alarmID, "Every", medicationName.getText().toString(), "Every " + everyXDaysNumber + " days", firstButton.getText().toString());
                             alarmID++;
                             sharedPref = MedicationFormActivity.this.getPreferences(Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPref.edit();
@@ -279,6 +284,7 @@ public class MedicationFormActivity extends AppCompatActivity implements
                                     calendar.set(Calendar.HOUR_OF_DAY, reminderHour);
                                     calendar.set(Calendar.MINUTE, reminderMinute);
                                     calendar.set(Calendar.SECOND, 0);
+                                    calendar.set(Calendar.MILLISECOND, 0);
 
                                     if (calendar.getTimeInMillis() < System.currentTimeMillis()) {
                                         calendar.add(Calendar.DAY_OF_YEAR, 7);
@@ -292,7 +298,8 @@ public class MedicationFormActivity extends AppCompatActivity implements
                             }
 
                             formDaysOfWeekString();
-                            CardData cardData = new CardData(alarmIdForDaysOfWeek, medicationName.getText().toString(), daysOfWeek.toString(), firstButton.getText().toString());
+                            CardData cardData = new CardData(alarmID, alarmIdForDaysOfWeek, "daysOfWeek", medicationName.getText().toString(), daysOfWeek.toString(), firstButton.getText().toString());
+                            alarmID++;
                             sharedPref = MedicationFormActivity.this.getPreferences(Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPref.edit();
                             editor.putInt("reminderIntegerId", alarmID);
@@ -312,7 +319,7 @@ public class MedicationFormActivity extends AppCompatActivity implements
     }
 
     // Form a string containing the days of the week the user has chosen so it can be displayed in the card back in the main activity
-    public void formDaysOfWeekString() {
+    private void formDaysOfWeekString() {
         if (finalDaysOfWeek.size() == 5 && finalDaysOfWeek.contains(1) && finalDaysOfWeek.contains(2) && finalDaysOfWeek.contains(3)
                 && finalDaysOfWeek.contains(4) && finalDaysOfWeek.contains(5)) {
             daysOfWeek.append("Weekdays");
@@ -348,7 +355,7 @@ public class MedicationFormActivity extends AppCompatActivity implements
     }
 
     // Time picker for the custom row
-    public void reminderTimePicker(final View v) {
+    private void reminderTimePicker() {
         Calendar currentTime = Calendar.getInstance();
         int hour = currentTime.get(Calendar.HOUR_OF_DAY);
         int minute = currentTime.get(Calendar.MINUTE);
@@ -364,7 +371,7 @@ public class MedicationFormActivity extends AppCompatActivity implements
     }
 
     // Helper function to format the 24 hour clock format to 12 hour clock format
-    public String formattedTime(int hour, int minute) {
+    private String formattedTime(int hour, int minute) {
         String amPm;
         int currentHour;
         String minutePrecede = "";
@@ -432,7 +439,7 @@ public class MedicationFormActivity extends AppCompatActivity implements
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
-    public void displayInventoryNumPickerFragment() {
+    private void displayInventoryNumPickerFragment() {
         DialogFragment newFragment = new InventoryNumPickerFragment();
         newFragment.show(getSupportFragmentManager(), "numPicker");
     }

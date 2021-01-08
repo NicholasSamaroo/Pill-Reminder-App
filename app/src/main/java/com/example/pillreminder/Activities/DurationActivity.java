@@ -20,8 +20,8 @@ import com.example.pillreminder.R;
 import java.util.Calendar;
 
 public class DurationActivity extends AppCompatActivity implements DurationUntilDateFragment.returnDurationDatePickerValue, DurationNumDaysFragment.returnDurationNumPickerValue {
-    String durationDatePicker;
-    String durationNumPicker;
+    private String durationDatePicker;
+    private String durationNumPicker;
 
     // We are displaying two different fragments by clicking on two different radio buttons
     // Namely, the fragment for the "Until Date" radio button and the fragment for the "For X amount of days" radio button
@@ -91,7 +91,7 @@ public class DurationActivity extends AppCompatActivity implements DurationUntil
     }
 
 
-    public void removeFragments() {
+    private void removeFragments() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
         if (fragmentA.isAdded()) {
@@ -104,7 +104,7 @@ public class DurationActivity extends AppCompatActivity implements DurationUntil
         ft.commit();
     }
 
-    public void displayNumDaysFragment() {
+    private void displayNumDaysFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (fragmentB.isAdded()) {
             ft.show(fragmentB);
@@ -118,7 +118,7 @@ public class DurationActivity extends AppCompatActivity implements DurationUntil
         ft.commit();
     }
 
-    public void displayUntilDateFragment() {
+    private void displayUntilDateFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (fragmentA.isAdded()) {
             ft.show(fragmentA);
@@ -156,7 +156,7 @@ public class DurationActivity extends AppCompatActivity implements DurationUntil
     }
 
     // Helper function to determine if the user has chosen the current day to start.
-    public String currentDate() {
+    private String currentDate() {
         final Calendar calendar = Calendar.getInstance();
         int currentYear = calendar.get(Calendar.YEAR);
         int currentMonth = calendar.get(Calendar.MONTH);

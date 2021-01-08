@@ -1,6 +1,5 @@
 package com.example.pillreminder;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -11,10 +10,8 @@ import android.graphics.Color;
 import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
 import com.example.pillreminder.Activities.MainActivity;
-import com.example.pillreminder.Activities.MedicationFormActivity;
 
 public class AlarmReceiver extends BroadcastReceiver {
     private NotificationManager mNotificationManager;
@@ -30,7 +27,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = context.getString(R.string.channel_name);
             String description = context.getString(R.string.channel_description);
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, name, importance);
             notificationChannel.setDescription(description);
             notificationChannel.enableLights(true);
@@ -45,7 +42,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setSmallIcon(R.drawable.ic_baseline_access_alarms_24)
                 .setContentTitle("Medication reminder for " + intent.getStringExtra("notificationTime"))
                 .setContentText(intent.getStringExtra("notificationMedicationName"))
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setContentIntent(notificationIntent)
                 .setAutoCancel(true);
 

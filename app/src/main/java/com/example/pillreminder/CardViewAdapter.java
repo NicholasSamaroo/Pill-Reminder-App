@@ -52,7 +52,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
         medicationTextView.setText(cardData.getMedicationName());
 
         TextView reminderTypeTextView = holder.spinnerValue;
-        reminderTypeTextView.setText(cardData.getAlarmType());
+        reminderTypeTextView.setText(cardData.getAlarmText());
 
         TextView reminderTimeTextView = holder.reminderTime;
         reminderTimeTextView.setText(cardData.getAlarmTime());

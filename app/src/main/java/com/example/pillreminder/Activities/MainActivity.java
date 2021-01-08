@@ -36,12 +36,15 @@ import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
-    final int LAUNCH_FORM_ACTIVITY = 1;
-    CardViewAdapter adapter;
-    ArrayList<CardData> cardData = new ArrayList<>();
-    CardData holder;
-    CardViewModel cardViewModel;
-    RecyclerView cardViewValues;
+    private final int LAUNCH_FORM_ACTIVITY = 1;
+
+    private CardData holder;
+    private ArrayList<CardData> cardData = new ArrayList<>();
+
+    private CardViewModel cardViewModel;
+
+    private RecyclerView cardViewValues;
+    private CardViewAdapter adapter;
 
 
     @Override

@@ -14,15 +14,17 @@ public class CardData implements Parcelable {
     @PrimaryKey
     private int alarmID;
 
-    private String medicationName;
     private String alarmType;
+    private String medicationName;
+    private String alarmText;
     private String alarmTime;
     private ArrayList<Integer> specificDaysOfWeekId;
 
     public CardData(CardData cardToCopy) {
         this.alarmID = cardToCopy.alarmID;
-        this.medicationName = cardToCopy.medicationName;
         this.alarmType = cardToCopy.alarmType;
+        this.medicationName = cardToCopy.medicationName;
+        this.alarmText = cardToCopy.alarmText;
         this.alarmTime = cardToCopy.alarmTime;
 
         if(cardToCopy.specificDaysOfWeekId != null){
@@ -30,24 +32,28 @@ public class CardData implements Parcelable {
         }
     }
 
-    public CardData(int alarmID, String medicationName, String alarmType, String alarmTime) {
+    public CardData(int alarmID, String alarmType, String medicationName, String alarmText, String alarmTime) {
         this.alarmID = alarmID;
-        this.medicationName = medicationName;
         this.alarmType = alarmType;
+        this.medicationName = medicationName;
+        this.alarmText = alarmText;
         this.alarmTime = alarmTime;
     }
 
-    public CardData(ArrayList<Integer> ids, String medicationName, String alarmType, String alarmTime) {
+    public CardData(int alarmID, ArrayList<Integer> ids, String alarmType, String medicationName, String alarmText, String alarmTime) {
+        this.alarmID = alarmID;
         this.specificDaysOfWeekId = ids;
-        this.medicationName = medicationName;
         this.alarmType = alarmType;
+        this.medicationName = medicationName;
+        this.alarmText = alarmText;
         this.alarmTime = alarmTime;
     }
 
     protected CardData(Parcel in) {
         alarmID = in.readInt();
-        medicationName = in.readString();
         alarmType = in.readString();
+        medicationName = in.readString();
+        alarmText = in.readString();
         alarmTime = in.readString();
     }
 
@@ -65,8 +71,9 @@ public class CardData implements Parcelable {
 
     public int getAlarmID() { return this.alarmID; }
     public ArrayList<Integer> getSpecificDaysOfWeekId() { return this.specificDaysOfWeekId; }
-    public String getMedicationName() { return this.medicationName; }
     public String getAlarmType() { return this.alarmType; }
+    public String getMedicationName() { return this.medicationName; }
+    public String getAlarmText() { return this.alarmText; }
     public String getAlarmTime() { return this.alarmTime; }
 
     public void setSpecificDaysOfWeekId(ArrayList<Integer> ids) { this.specificDaysOfWeekId = ids; }
@@ -79,8 +86,9 @@ public class CardData implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(alarmID);
-        dest.writeString(medicationName);
         dest.writeString(alarmType);
+        dest.writeString(medicationName);
+        dest.writeString(alarmText);
         dest.writeString(alarmTime);
     }
 }
