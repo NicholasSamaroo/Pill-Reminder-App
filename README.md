@@ -18,14 +18,11 @@ Features to be integrated in the future include: a duration option which allows 
 **DEMO**
 ------
 ![Demo](https://github.com/NicholasSamaroo/Pill-Reminder-App/blob/master/demo/demo.gif)
-Demo
 
 **EXAMPLE NOTIFICATION**
 ----------------------
 ![Example Notification](https://github.com/NicholasSamaroo/Pill-Reminder-App/blob/master/Notification%20Example/Notification.gif)
-Example of Notification being fired
 
 **FEATURES TO BE ADDED IN FUTURE**
 --------------------------------
 ![Future integrations](https://github.com/NicholasSamaroo/Pill-Reminder-App/blob/master/Future%20integrations/needToIntegrate.gif)
-Features to be integrated in the future
