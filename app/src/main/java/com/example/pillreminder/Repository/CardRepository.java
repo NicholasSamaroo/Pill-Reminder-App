@@ -1,4 +1,4 @@
-package com.example.pillreminder.Database;
+package com.example.pillreminder.Repository;
 
 import android.app.Application;
 import android.os.AsyncTask;
@@ -6,8 +6,8 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import com.example.pillreminder.Database.CardDAO;
-import com.example.pillreminder.Database.CardData;
 import com.example.pillreminder.Database.CardRoomDatabase;
+import com.example.pillreminder.Model.CardData;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -16,13 +16,13 @@ public class CardRepository {
     private CardDAO mCardDao;
     private LiveData<List<CardData>> mAllCards;
 
-    CardRepository(Application application) {
+    public CardRepository(Application application) {
         CardRoomDatabase db = CardRoomDatabase.getDataBase(application);
         mCardDao = db.cardDAO();
         mAllCards = mCardDao.getAllCardValues();
     }
 
-    LiveData<List<CardData>> getAllCards() {
+    public LiveData<List<CardData>> getAllCards() {
         return mAllCards;
     }
 

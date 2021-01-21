@@ -1,4 +1,4 @@
-package com.example.pillreminder.Database;
+package com.example.pillreminder.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

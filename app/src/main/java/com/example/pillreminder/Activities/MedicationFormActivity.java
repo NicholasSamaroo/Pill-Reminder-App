@@ -32,7 +32,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.pillreminder.AlarmReceiver;
-import com.example.pillreminder.Database.CardData;
+import com.example.pillreminder.Model.CardData;
 import com.example.pillreminder.Fragments.Frequency.DailyEveryXHours;
 import com.example.pillreminder.Fragments.Frequency.EveryXDaysFragment;
 import com.example.pillreminder.Fragments.Frequency.SpecificDaysFragment;

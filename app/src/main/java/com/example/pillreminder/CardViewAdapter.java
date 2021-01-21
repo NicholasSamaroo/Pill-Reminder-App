@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pillreminder.Database.CardData;
+import com.example.pillreminder.Model.CardData;
 
 import java.util.List;
 

@@ -1,9 +1,12 @@
-package com.example.pillreminder.Database;
+package com.example.pillreminder.ViewModel;
 
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+
+import com.example.pillreminder.Model.CardData;
+import com.example.pillreminder.Repository.CardRepository;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;

@@ -9,9 +9,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.pillreminder.AlarmReceiver;
-import com.example.pillreminder.Database.CardData;
+import com.example.pillreminder.Model.CardData;
 import com.example.pillreminder.CardViewAdapter;
-import com.example.pillreminder.Database.CardViewModel;
+import com.example.pillreminder.ViewModel.CardViewModel;
 import com.example.pillreminder.R;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

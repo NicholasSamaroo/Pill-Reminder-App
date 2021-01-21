@@ -7,6 +7,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import com.example.pillreminder.Model.CardData;
+
 @Database(entities = {CardData.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class CardRoomDatabase extends RoomDatabase {
