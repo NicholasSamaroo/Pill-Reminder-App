@@ -1,6 +1,6 @@
 # Pill-Reminder-App
 
-Utilized Androids **Notification framework** and **AlarmManger** to create an Android mobile application allowing users to pick from various alarm types 
+Utilized Androids **Notification framework**, **AlarmManager**, and **Architecture Components**, to create an Android mobile application allowing users to pick from various alarm types 
 designed to remind them to take their medication.
 
 **APP DESCRIPTION**
