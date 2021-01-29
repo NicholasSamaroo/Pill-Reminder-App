@@ -13,14 +13,14 @@ import com.example.pillreminder.Model.CardData;
 
 import java.util.List;
 
-public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHolder> {
+public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.CardViewHolder> {
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class CardViewHolder extends RecyclerView.ViewHolder {
         public TextView medicationName;
         public TextView spinnerValue;
         public TextView reminderTime;
 
-        public ViewHolder(@NonNull View itemView) {
+        public CardViewHolder(@NonNull View itemView) {
             super(itemView);
 
             medicationName = itemView.findViewById(R.id.medicationName);
@@ -36,16 +36,16 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
 
     @NonNull
     @Override
-    public CardViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CardViewAdapter.CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View cardView = inflater.inflate(R.layout.card_layout,parent,false);
-        return new ViewHolder(cardView);
+        return new CardViewHolder(cardView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
         CardData cardData = mCardViewValues.get(position);
 
         TextView medicationTextView = holder.medicationName;

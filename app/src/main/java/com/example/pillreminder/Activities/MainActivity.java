@@ -7,14 +7,9 @@ import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.example.pillreminder.AlarmReceiver;
-import com.example.pillreminder.Model.CardData;
-import com.example.pillreminder.CardViewAdapter;
-import com.example.pillreminder.ViewModel.CardViewModel;
-import com.example.pillreminder.R;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,25 +20,21 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.View;
-
-import android.view.Menu;
-import android.view.MenuItem;
+import com.example.pillreminder.AlarmReceiver;
+import com.example.pillreminder.CardViewAdapter;
+import com.example.pillreminder.Model.CardData;
+import com.example.pillreminder.R;
+import com.example.pillreminder.ViewModel.CardViewModel;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
-
     private final int LAUNCH_FORM_ACTIVITY = 1;
 
     private CardData holder;
-    private ArrayList<CardData> cardData = new ArrayList<>();
-
     private CardViewModel cardViewModel;
-
-    private RecyclerView cardViewValues;
     private CardViewAdapter adapter;
 
 
@@ -54,24 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        instantiateRecyclerView();
         cardViewModel = ViewModelProviders.of(this).get(CardViewModel.class);
 
-        // Load any Card objects from the database back into the recycler view
-        try {
-            cardViewValues = findViewById(R.id.my_recycler_view);
-            cardData = (ArrayList<CardData>) cardViewModel.getAllSavedCardValues();
-            adapter = new CardViewAdapter(cardData);
-            cardViewValues.setAdapter(adapter);
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-            cardViewValues.setLayoutManager(linearLayoutManager);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         // A Live Data observer which will update the adapter if we insert or delete an item from the database
-        cardViewModel.getAllWords().observe(this, new Observer<List<CardData>>() {
+        // On a fresh app start, we want to restore any saved data that was previously saved to our data base
+        // There is no need to create a separate query method in our DAO to restore any saved data in our database because
+        // live data handles getting that saved data for us. Refer to the live data overview over at developer.android.com
+        cardViewModel.getAllCards().observe(this, new Observer<List<CardData>>() {
             @Override
             public void onChanged(List<CardData> liveCardData) {
                 adapter.setCards(liveCardData);
@@ -86,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(navigation, LAUNCH_FORM_ACTIVITY);
             }
         });
+    }
+
+    private void instantiateRecyclerView() {
+        RecyclerView cardViewValues = findViewById(R.id.my_recycler_view);
+        adapter = new CardViewAdapter(null);
+        cardViewValues.setAdapter(adapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        cardViewValues.setLayoutManager(linearLayoutManager);
 
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override

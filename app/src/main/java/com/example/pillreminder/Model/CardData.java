@@ -32,6 +32,9 @@ public class CardData implements Parcelable {
         }
     }
 
+    /*When you shut device down and turn it back on, all alarms are canceled unless you set up a broadcast receiver
+    * to receive the boot completed action and restore all alarms set. We need the alarmType field because there was no way
+    * to uniquely identify the type of alarm. The id is simply used for alarm creation and the alarm text is not a good identifier*/
     public CardData(int alarmID, String alarmType, String medicationName, String alarmText, String alarmTime) {
         this.alarmID = alarmID;
         this.alarmType = alarmType;

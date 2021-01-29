@@ -10,11 +10,10 @@ import com.example.pillreminder.Database.CardRoomDatabase;
 import com.example.pillreminder.Model.CardData;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class CardRepository {
-    private CardDAO mCardDao;
-    private LiveData<List<CardData>> mAllCards;
+    private final CardDAO mCardDao;
+    private final LiveData<List<CardData>> mAllCards;
 
     public CardRepository(Application application) {
         CardRoomDatabase db = CardRoomDatabase.getDataBase(application);
@@ -22,7 +21,7 @@ public class CardRepository {
         mAllCards = mCardDao.getAllCardValues();
     }
 
-    public LiveData<List<CardData>> getAllCards() {
+    public LiveData<List<CardData>> getAllDataBaseCards() {
         return mAllCards;
     }
 
@@ -77,22 +76,6 @@ public class CardRepository {
         protected Void doInBackground(final Integer... params) {
             mAsyncTaskDao.deleteItemByItemId(params[0]);
             return null;
-        }
-    }
-
-    public List<CardData> getAllSavedCardValues() throws ExecutionException, InterruptedException {
-        return new getAllSavedCardValuesAsyncTask(mCardDao).execute().get();
-    }
-
-    private static class getAllSavedCardValuesAsyncTask extends AsyncTask<Void,Void,List<CardData> > {
-        private CardDAO mAsyncTaskDao;
-
-        getAllSavedCardValuesAsyncTask(CardDAO cardDAO) {
-            mAsyncTaskDao = cardDAO;
-        }
-        @Override
-        protected List<CardData> doInBackground(Void... cards) {
-            return mAsyncTaskDao.getSavedCardValues();
         }
     }
 }

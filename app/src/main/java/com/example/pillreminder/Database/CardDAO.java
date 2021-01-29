@@ -24,7 +24,4 @@ public interface CardDAO {
 
     @Query("SELECT * FROM card_table ORDER BY alarmID ASC")
     LiveData<List<CardData>> getAllCardValues();
-
-    @Query("SELECT * FROM card_table")
-    List<CardData> getSavedCardValues();
 }

@@ -1,13 +1,6 @@
 package com.example.pillreminder.Activities;
 
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -18,7 +11,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,12 +23,18 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.pillreminder.AlarmReceiver;
-import com.example.pillreminder.Model.CardData;
 import com.example.pillreminder.Fragments.Frequency.DailyEveryXHours;
 import com.example.pillreminder.Fragments.Frequency.EveryXDaysFragment;
 import com.example.pillreminder.Fragments.Frequency.SpecificDaysFragment;
 import com.example.pillreminder.Fragments.InventoryNumPickerFragment;
+import com.example.pillreminder.Model.CardData;
 import com.example.pillreminder.R;
 
 import java.util.ArrayList;
@@ -56,14 +54,17 @@ public class MedicationFormActivity extends AppCompatActivity implements
     private ImageButton imageButtonOne;
     private Button firstButton;
 
-    private StringBuilder daysOfWeek = new StringBuilder();
-    private ArrayList<Integer> alarmIdForDaysOfWeek = new ArrayList<>();
+    private final StringBuilder daysOfWeek = new StringBuilder();
+    private final ArrayList<Integer> alarmIdForDaysOfWeek = new ArrayList<>();
     private ArrayList<Integer> finalDaysOfWeek = null;
 
     private AlarmManager alarmManager;
     private PendingIntent alarmIntent;
     private Intent notifyIntent;
     private SharedPreferences sharedPref;
+
+    private Calendar calendar;
+    private EditText medicationName;
 
 
     @Override
@@ -156,10 +157,10 @@ public class MedicationFormActivity extends AppCompatActivity implements
 
         // Button to navigate back to the main activity
         // Before we navigate back to the main activity we need to make sure of a few things
-            // The edit text is not empty and the user has chosen a time for the alarm
+        // The edit text is not empty and the user has chosen a time for the alarm
         // Each different alarm type has varying checks to make sure the user has filled out all pertinent information
 
-        final EditText medicationName = findViewById(R.id.medicationName);
+        medicationName = findViewById(R.id.medicationName);
         Button saveButton = findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             // Things to check for before we create the alarm
@@ -169,153 +170,167 @@ public class MedicationFormActivity extends AppCompatActivity implements
             // Reminder time needs to be chose from custom layout
             @Override
             public void onClick(View v) {
-                Intent formToMain = new Intent();
-                Calendar calendar;
                 switch (spinner.getSelectedItemPosition()) {
                     case 0:
-                        // DAILY
-                        if (reminderHour != -1 && reminderMinute != -1 && !(medicationName.getText().toString().isEmpty())) {
-                            notifyIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
-                            notifyIntent.putExtra("notificationTime", firstButton.getText().toString());
-                            notifyIntent.putExtra("notificationMedicationName", medicationName.getText().toString());
-                            alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), alarmID, notifyIntent, 0);
-                            alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-
-                            calendar = Calendar.getInstance();
-                            calendar.setTimeInMillis(System.currentTimeMillis());
-                            calendar.set(Calendar.HOUR_OF_DAY, reminderHour);
-                            calendar.set(Calendar.MINUTE, reminderMinute);
-                            calendar.set(Calendar.SECOND, 0);
-                            calendar.set(Calendar.MILLISECOND, 0);
-
-                            if (calendar.getTimeInMillis() < System.currentTimeMillis()) {
-                                calendar.add(Calendar.DAY_OF_YEAR, 1);
-                            }
-
-                            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
-
-                            CardData cardData = new CardData(alarmID, "Daily", medicationName.getText().toString(), "Daily", firstButton.getText().toString());
-                            alarmID++;
-                            sharedPref = MedicationFormActivity.this.getPreferences(Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPref.edit();
-                            editor.putInt("reminderIntegerId", alarmID);
-                            editor.apply();
-
-                            formToMain.putExtra("daily", cardData);
-                            setResult(Activity.RESULT_OK, formToMain);
-                            finish();
-                            break;
-                        } else {
-                            Toast.makeText(getApplicationContext(),
-                                    "Please ensure you have entered your medication name and have chosen a time for your Daily alarm", Toast.LENGTH_LONG).show();
-                            return;
-                        }
+                        setDailyAlarm();
+                        break;
                     case 1:
-                        // Daily every X hours
-                        Toast.makeText(getApplicationContext(), "The \"Daily every X hours\" feature will be implemented in the near future", Toast.LENGTH_LONG).show();
+                        setDailyEveryXHoursAlarm();
                         break;
                     case 2:
-                        // Every X DAYS
-                        if (reminderHour != -1 && reminderMinute != -1 && !(medicationName.getText().toString().isEmpty())) {
-                            notifyIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
-                            notifyIntent.putExtra("notificationTime", firstButton.getText().toString());
-                            notifyIntent.putExtra("notificationMedicationName", medicationName.getText().toString());
-                            alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), alarmID, notifyIntent, 0);
-                            alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-
-                            calendar = Calendar.getInstance();
-                            calendar.setTimeInMillis(System.currentTimeMillis());
-                            calendar.set(Calendar.HOUR_OF_DAY, reminderHour);
-                            calendar.set(Calendar.MINUTE, reminderMinute);
-                            calendar.set(Calendar.SECOND, 0);
-                            calendar.set(Calendar.MILLISECOND, 0);
-
-                            if (calendar.getTimeInMillis() < System.currentTimeMillis()) {
-                                calendar.add(Calendar.DAY_OF_YEAR, everyXDaysNumber);
-                            }
-
-                            if (everyXDaysNumber == 0) {
-                                Toast.makeText(getApplicationContext(), "Please choose a number for the 'every' interval", Toast.LENGTH_LONG).show();
-                                return;
-                            }
-
-                            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * everyXDaysNumber, alarmIntent);
-
-                            CardData cardData = new CardData(alarmID, "Every", medicationName.getText().toString(), "Every " + everyXDaysNumber + " days", firstButton.getText().toString());
-                            alarmID++;
-                            sharedPref = MedicationFormActivity.this.getPreferences(Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPref.edit();
-                            editor.putInt("reminderIntegerId", alarmID);
-                            editor.apply();
-
-                            formToMain.putExtra("everyXDays", cardData);
-                            setResult(Activity.RESULT_OK, formToMain);
-                            finish();
-                            break;
-                        } else {
-                            Toast.makeText(getApplicationContext(),
-                                    "Please ensure you have entered your medication name and have chosen a time for the alarm", Toast.LENGTH_LONG).show();
-                            return;
-                        }
+                        setEveryXDaysAlarm();
+                        break;
                     case 3:
-                        // SPECIFIC DAYS OF THE WEEK
-                        if (reminderHour != -1 && reminderMinute != -1 && !(medicationName.getText().toString().isEmpty())) {
-                            if (finalDaysOfWeek == null || finalDaysOfWeek.isEmpty()) {
-                                Toast.makeText(getApplicationContext(), "Please select a day of the week", Toast.LENGTH_LONG).show();
-                                return;
-                            } else if (finalDaysOfWeek.size() == 7) {
-                                // After app is completed look into making the alarm creation functional so I could just call the createDailyAlarm function
-                                Toast.makeText(getApplicationContext(), "Based on your selection, you should create a Daily alarm", Toast.LENGTH_LONG).show();
-                                return;
-                            } else {
-                                notifyIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
-                                notifyIntent.putExtra("notificationTime", firstButton.getText().toString());
-                                notifyIntent.putExtra("notificationMedicationName", medicationName.getText().toString());
-                                alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-
-                                if (!alarmIdForDaysOfWeek.isEmpty()) {
-                                    alarmIdForDaysOfWeek.clear();
-                                }
-                                for (Integer i : finalDaysOfWeek) {
-                                    Log.e("test", String.valueOf(i));
-                                    calendar = Calendar.getInstance();
-                                    calendar.setTimeInMillis(System.currentTimeMillis());
-                                    calendar.set(Calendar.DAY_OF_WEEK, i);
-                                    calendar.set(Calendar.HOUR_OF_DAY, reminderHour);
-                                    calendar.set(Calendar.MINUTE, reminderMinute);
-                                    calendar.set(Calendar.SECOND, 0);
-                                    calendar.set(Calendar.MILLISECOND, 0);
-
-                                    if (calendar.getTimeInMillis() < System.currentTimeMillis()) {
-                                        calendar.add(Calendar.DAY_OF_YEAR, 7);
-                                    }
-
-                                    alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), alarmID, notifyIntent, 0);
-                                    alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, alarmIntent);
-                                    alarmIdForDaysOfWeek.add(alarmID);
-                                    alarmID++;
-                                }
-                            }
-
-                            formDaysOfWeekString();
-                            CardData cardData = new CardData(alarmID, alarmIdForDaysOfWeek, "daysOfWeek", medicationName.getText().toString(), daysOfWeek.toString(), firstButton.getText().toString());
-                            alarmID++;
-                            sharedPref = MedicationFormActivity.this.getPreferences(Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPref.edit();
-                            editor.putInt("reminderIntegerId", alarmID);
-                            editor.apply();
-
-                            formToMain.putExtra("specificDaysOfWeek", cardData);
-                            setResult(Activity.RESULT_OK, formToMain);
-                            finish();
-                            break;
-                        } else {
-                            Toast.makeText(getApplicationContext(),
-                                    "Please ensure you have entered your medication name and have chosen a time for the alarm", Toast.LENGTH_LONG).show();
-                        }
+                        setSpecificDaysOfWeekAlarm();
+                        break;
                 }
             }
         });
+    }
+
+    private void setDailyAlarm() {
+        if (reminderHour != -1 && reminderMinute != -1 && !(medicationName.getText().toString().isEmpty())) {
+            notifyIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
+            notifyIntent.putExtra("notificationTime", firstButton.getText().toString());
+            notifyIntent.putExtra("notificationMedicationName", medicationName.getText().toString());
+            alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), alarmID, notifyIntent, 0);
+            alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+            calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            calendar.set(Calendar.HOUR_OF_DAY, reminderHour);
+            calendar.set(Calendar.MINUTE, reminderMinute);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
+
+            if (calendar.getTimeInMillis() < System.currentTimeMillis()) {
+                calendar.add(Calendar.DAY_OF_YEAR, 1);
+            }
+
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+
+            CardData cardData = new CardData(alarmID, "Daily", medicationName.getText().toString(), "Daily", firstButton.getText().toString());
+            alarmID++;
+            sharedPref = MedicationFormActivity.this.getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt("reminderIntegerId", alarmID);
+            editor.apply();
+
+            Intent formToMain = new Intent();
+            formToMain.putExtra("daily", cardData);
+            setResult(Activity.RESULT_OK, formToMain);
+            finish();
+        } else {
+            Toast.makeText(getApplicationContext(),
+                    "Please ensure you have entered your medication name and have chosen a time for your Daily alarm", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void setDailyEveryXHoursAlarm() {
+        // Daily every X hours
+        Toast.makeText(getApplicationContext(), "The \"Daily every X hours\" feature will be implemented in the near future", Toast.LENGTH_LONG).show();
+    }
+
+    private void setEveryXDaysAlarm() {
+        // Every X DAYS
+        if (reminderHour != -1 && reminderMinute != -1 && !(medicationName.getText().toString().isEmpty())) {
+            notifyIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
+            notifyIntent.putExtra("notificationTime", firstButton.getText().toString());
+            notifyIntent.putExtra("notificationMedicationName", medicationName.getText().toString());
+            alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), alarmID, notifyIntent, 0);
+            alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+            calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            calendar.set(Calendar.HOUR_OF_DAY, reminderHour);
+            calendar.set(Calendar.MINUTE, reminderMinute);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
+
+            if (calendar.getTimeInMillis() < System.currentTimeMillis()) {
+                calendar.add(Calendar.DAY_OF_YEAR, everyXDaysNumber);
+            }
+
+            if (everyXDaysNumber == 0) {
+                Toast.makeText(getApplicationContext(), "Please choose a number for the 'every' interval", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * everyXDaysNumber, alarmIntent);
+
+            CardData cardData = new CardData(alarmID, "Every", medicationName.getText().toString(), "Every " + everyXDaysNumber + " days", firstButton.getText().toString());
+            alarmID++;
+            sharedPref = MedicationFormActivity.this.getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt("reminderIntegerId", alarmID);
+            editor.apply();
+
+            Intent formToMain = new Intent();
+            formToMain.putExtra("everyXDays", cardData);
+            setResult(Activity.RESULT_OK, formToMain);
+            finish();
+
+        } else {
+            Toast.makeText(getApplicationContext(),
+                    "Please ensure you have entered your medication name and have chosen a time for the alarm", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void setSpecificDaysOfWeekAlarm() {
+        // SPECIFIC DAYS OF THE WEEK
+        if (reminderHour != -1 && reminderMinute != -1 && !(medicationName.getText().toString().isEmpty())) {
+            if (finalDaysOfWeek == null || finalDaysOfWeek.isEmpty()) {
+                Toast.makeText(getApplicationContext(), "Please select a day of the week", Toast.LENGTH_LONG).show();
+                return;
+            } else if (finalDaysOfWeek.size() == 7) {
+                // If all days of the week are selected then it is really a daily alarm, so call the daily alarm method
+                setDailyAlarm();
+            } else {
+                notifyIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                notifyIntent.putExtra("notificationTime", firstButton.getText().toString());
+                notifyIntent.putExtra("notificationMedicationName", medicationName.getText().toString());
+                alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+                if (!alarmIdForDaysOfWeek.isEmpty()) {
+                    alarmIdForDaysOfWeek.clear();
+                }
+                for (Integer i : finalDaysOfWeek) {
+                    Log.e("test", String.valueOf(i));
+                    calendar = Calendar.getInstance();
+                    calendar.setTimeInMillis(System.currentTimeMillis());
+                    calendar.set(Calendar.DAY_OF_WEEK, i);
+                    calendar.set(Calendar.HOUR_OF_DAY, reminderHour);
+                    calendar.set(Calendar.MINUTE, reminderMinute);
+                    calendar.set(Calendar.SECOND, 0);
+                    calendar.set(Calendar.MILLISECOND, 0);
+
+                    if (calendar.getTimeInMillis() < System.currentTimeMillis()) {
+                        calendar.add(Calendar.DAY_OF_YEAR, 7);
+                    }
+
+                    alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), alarmID, notifyIntent, 0);
+                    alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, alarmIntent);
+                    alarmIdForDaysOfWeek.add(alarmID);
+                    alarmID++;
+                }
+            }
+
+            formDaysOfWeekString();
+            CardData cardData = new CardData(alarmID, alarmIdForDaysOfWeek, "daysOfWeek", medicationName.getText().toString(), daysOfWeek.toString(), firstButton.getText().toString());
+            alarmID++;
+            sharedPref = MedicationFormActivity.this.getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt("reminderIntegerId", alarmID);
+            editor.apply();
+
+            Intent formToMain = new Intent();
+            formToMain.putExtra("specificDaysOfWeek", cardData);
+            setResult(Activity.RESULT_OK, formToMain);
+            finish();
+        } else {
+            Toast.makeText(getApplicationContext(),
+                    "Please ensure you have entered your medication name and have chosen a time for the alarm", Toast.LENGTH_LONG).show();
+        }
     }
 
     // Form a string containing the days of the week the user has chosen so it can be displayed in the card back in the main activity
@@ -459,16 +474,5 @@ public class MedicationFormActivity extends AppCompatActivity implements
     @Override
     public void everyXDaysValue(String val) {
         everyXDaysNumber = Integer.parseInt(val);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == android.R.id.home) {
-            onBackPressed();
-            return true;
-        }
-        return (super.onOptionsItemSelected(item));
     }
 }
